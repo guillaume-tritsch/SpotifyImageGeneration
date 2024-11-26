@@ -4,7 +4,7 @@ class API {
   isDevMode = false;
   devCallbackURI = "http://localhost:5500/callback.html";
   prodCallbackURL =
-    "https://guillaume-tritsch.github.io/SpotifyImageGeneration/pages/callback";
+    "https://guillaume-tritsch.github.io/SpotifyImageGeneration/callback";
   spotifyData = {
     clientID: "5dbf2ff92be149ca98e8198088566890",
   };
