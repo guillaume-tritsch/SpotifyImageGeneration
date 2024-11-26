@@ -35,12 +35,12 @@ class API {
 
   setToken(token) {
     sessionStorage.setItem("access_token", token);
-    window.location.href = "http://localhost:5500/index.html";
+    window.location.href = "https://guillaume-tritsch.github.io/SpotifyImageGeneration/index.html";
   }
 
   deleteToken() {
     sessionStorage.removeItem("access_token");
-    window.location.href = "http://localhost:5500/index.html";
+    window.location.href = "https://guillaume-tritsch.github.io/SpotifyImageGeneration/index.html";
   }
 
   clearAllData() {
