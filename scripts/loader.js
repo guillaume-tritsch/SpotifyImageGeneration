@@ -66,14 +66,17 @@ Promise.all([APIInstance.isAllDataObtained(), ...isAllLoaded])
     }
 
     // Users data
-    let userImageHTMLElement =
-      document.getElementsByClassName("data-user-image");
+    if (APIInstance.isConnected()) {
+      let userImageHTMLElement =
+        document.getElementsByClassName("data-user-image");
 
-    let userNameHTMLElement = document.getElementsByClassName("data-user-name");
-    console.log(userNameHTMLElement.length);
-    for (let el of userNameHTMLElement) {
-      console.log(APIInstance.getUserName());
-      el.innerText = APIInstance.getUserName();
+      let userNameHTMLElement =
+        document.getElementsByClassName("data-user-name");
+      console.log(userNameHTMLElement.length);
+      for (let el of userNameHTMLElement) {
+        console.log(APIInstance.getUserName());
+        el.innerText = APIInstance.getUserName();
+      }
     }
   })
   .catch((error) => {

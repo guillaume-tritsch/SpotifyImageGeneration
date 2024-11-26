@@ -16,6 +16,7 @@ class API {
 
   userData;
   userTopTracks;
+  topTracksFeatures = null;
 
   async spotifyConnect() {
     window.location.href =
@@ -56,7 +57,7 @@ class API {
     }
 
     if (this.isConnected() && !sessionStorage["top_tracks"]) {
-      dataToObtains.push(this.fetchTopTracks(50));
+      dataToObtains.push(this.fetchTopTracks(5));
     }
 
     this.promiseAllObtention = Promise.all(dataToObtains).then(() => {
@@ -66,7 +67,7 @@ class API {
   }
 
   getUserName() {
-    return this.userData['display_name'];
+    return this.userData["display_name"];
   }
 
   async fetchTopTracks(limit) {
@@ -79,13 +80,51 @@ class API {
           "Content-Type": "application/json",
         },
       });
-      console.log(response)
+      console.log(response);
       if (!response.ok) {
         throw new Error("Error fetching top tracks");
       }
 
       const data = await response.json();
       sessionStorage.setItem("top_tracks", JSON.stringify(data));
+    } catch (error) {
+      console.error("Erreur lors de la récupération des morceaux:", error);
+    }
+  }
+
+  async getAllTopTrackFeature() {
+    console.log("eee")
+    if (this.topTracksFeatures === null) {
+      console.log("bbb")
+
+      let trackPromiseArray = [];
+      for (let track of this.userTopTracks["items"]) {
+        console.log("eerfff")
+        trackPromiseArray.push(this.fetchTrackFeatures(track["id"]));
+      }
+
+      this.topTracksFeatures = Promise.all(trackPromiseArray);
+    }
+    return this.topTracksFeatures;
+  }
+
+  async fetchTrackFeatures(id) {
+    const url = `https://api.spotify.com/v1/audio-features/${id}`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${this.#token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Error fetching top tracks");
+      }
+
+      const data = await response.json();
+      return data;
     } catch (error) {
       console.error("Erreur lors de la récupération des morceaux:", error);
     }
@@ -107,7 +146,6 @@ class API {
       }
 
       const data = await response.json();
-      console.log(JSON.stringify(data));
       sessionStorage.setItem("user_data", JSON.stringify(data));
     } catch (error) {
       console.error("Erreur lors des données utilisateurs:", error);
