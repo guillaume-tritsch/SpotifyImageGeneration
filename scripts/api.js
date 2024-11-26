@@ -1,7 +1,7 @@
 class API {
   #token = null;
 
-  isDevMode = true;
+  isDevMode = false;
   devCallbackURI = "http://localhost:5500/callback.html";
   prodCallbackURL =
     "https://guillaume-tritsch.github.io/SpotifyImageGeneration/pages/callback";
