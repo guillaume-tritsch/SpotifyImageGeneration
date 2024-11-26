@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="./scripts/api.js"></script>
+    <script src="./scripts/loader.js"></script>
+
+  </head>
+  <body>
+    <script>
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+
+      const accessToken = params.get("access_token");
+
+      APIInstance.setToken(accessToken);
+    </script>
+  </body>
+</html>
