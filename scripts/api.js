@@ -74,7 +74,7 @@ class API {
   }
 
   async fetchTopTracks(limit) {
-    const url = `${API_URL}/top/tracks?time_range=long_term&limit=${limit}`;
+    const url = `${API_URL}/me/top/tracks?time_range=long_term&limit=${limit}`;
     try {
       const response = await fetch(url, {
         method: "GET",
