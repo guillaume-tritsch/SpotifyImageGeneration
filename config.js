@@ -1,4 +1,4 @@
-const IS_DEV_MODE = false;
+const IS_DEV_MODE = true;
 
 const DEV_URL = "http://localhost:5500";
 const PROD_URL = "https://guillaume-tritsch.github.io/SpotifyImageGeneration";
@@ -9,3 +9,4 @@ const API_URL = "https://api.spotify.com/v1";
 const AUTH_URL = "https://accounts.spotify.com";
 
 const SCOPE = "user-top-read user-read-private user-read-email";
+const CLIENT_SECRET = "bf02fb63ce65498e8c66ef6106ba7696";

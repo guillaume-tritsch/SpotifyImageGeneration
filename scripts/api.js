@@ -20,7 +20,6 @@ class API {
   }
 
   async spotifyConnect() {
-
      window.location.href = AUTH_URL +
       "/authorize?client_id=" +
       CLIENT_ID +
@@ -34,9 +33,15 @@ class API {
     return this.#token != null;
   }
 
+  setCode(code) {
+    sessionStorage.setItem("code", code);
+    this.requestToken(code)
+  }
+
   setToken(token) {
     sessionStorage.setItem("access_token", token);
     window.location.href = this.#getBase();
+
   }
 
   deleteToken() {
@@ -46,6 +51,31 @@ class API {
 
   clearAllData() {
     sessionStorage.clear();
+  }
+
+  async requestToken(code) {
+    const credentials = CLIENT_ID + ':' + CLIENT_SECRET;
+    const base64Credentials = btoa(unescape(encodeURIComponent(credentials)));
+
+    const url = `https://accounts.spotify.com/api/token?code=${code}&redirect_uri=${this.#getCallbackURL()}&grant_type=authorization_code`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Authorization": 'Basic ' + base64Credentials,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw new Error("Error request token");
+      }
+
+      const data = await response.json();
+      this.setToken(data["access_token"])
+    } catch (error) {
+      console.error("Erreur token:", error);
+    }
   }
 
   constructor() {
