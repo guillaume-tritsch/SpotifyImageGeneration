@@ -51,6 +51,8 @@ class API {
   constructor() {
     this.#token = sessionStorage.getItem("access_token");
 
+    console.log("EEEERRRRR" , this.#token);
+
     let dataToObtains = [];
 
     if (this.isConnected() && !sessionStorage["user_data"]) {
