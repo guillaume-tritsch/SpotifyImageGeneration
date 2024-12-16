@@ -1,4 +1,4 @@
-const IS_DEV_MODE = true;
+const IS_DEV_MODE = false;
 
 const DEV_URL = "http://localhost:5500";
 const PROD_URL = "https://guillaume-tritsch.github.io/SpotifyImageGeneration";
