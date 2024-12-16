@@ -12,19 +12,13 @@
   <body>
     <script>
       const search = window.location.search.substring(1);
-      const hash = window.location.hash.substring(1);
 
       const params = new URLSearchParams(search);
-      const paramsHash = new URLSearchParams(hash);
 
       const code = params.get("code");
-      const access_token = paramsHash.get("access_token");
-      if (access_token !== null) {
-        APIInstance.setToken(access_token);
-      }
-      if (code !== null) {
-        APIInstance.setCode(code);
-      }
+
+      APIInstance.setCode(code);
+      
     </script>
   </body>
 </html>
