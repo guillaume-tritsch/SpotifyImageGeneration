@@ -20,21 +20,14 @@ class API {
   }
 
   async spotifyConnect() {
-    console.log(AUTH_URL +
+
+     window.location.href = AUTH_URL +
       "/authorize?client_id=" +
       CLIENT_ID +
-      "&response_type=token&redirect_uri=" +
+      "&response_type=code&redirect_uri=" +
       this.#getCallbackURL() +
       "&scope=" +
-      SCOPE)
-    // window.location.href =
-    //   AUTH_URL +
-    //   "/authorize?client_id=" +
-    //   CLIENT_ID +
-    //   "&response_type=token&redirect_uri=" +
-    //   this.#getCallbackURL() +
-    //   "&scope=" +
-    //   SCOPE;
+      SCOPE + "&show_dialog=true"
   }
 
   isConnected() {
