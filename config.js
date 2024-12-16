@@ -8,4 +8,4 @@ const CLIENT_ID = "5dbf2ff92be149ca98e8198088566890";
 const API_URL = "https://api.spotify.com/v1";
 const AUTH_URL = "https://accounts.spotify.com";
 
-const SCOPE = "user-top-read";
+const SCOPE = "user-top-read user-read-private user-read-email";
