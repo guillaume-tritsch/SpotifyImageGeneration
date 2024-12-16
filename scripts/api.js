@@ -1,32 +1,33 @@
+
 class API {
   #token = null;
 
-  isDevMode = false;
-  devCallbackURI = "http://localhost:5500/callback.html";
+  devCallbackURI = "callback.html";
   prodCallbackURL =
-    "https://guillaume-tritsch.github.io/SpotifyImageGeneration/callback";
-  spotifyData = {
-    clientID: "5dbf2ff92be149ca98e8198088566890",
-  };
-
-  baseURL = "https://accounts.spotify.com/";
-  scope = "user-top-read";
+    "callback";
 
   promiseAllObtention;
 
   userData;
   userTopTracks;
-  topTracksFeatures = null;
+
+  #getCallbackURL() {
+    return `${this.#getBase()}/${(IS_DEV_MODE) ? 'callback.html' : 'callback' }`
+  }
+
+  #getBase() {
+    return (IS_DEV_MODE) ? DEV_URL : PROD_URL;
+  }
 
   async spotifyConnect() {
     window.location.href =
-      this.baseURL +
-      "authorize?client_id=" +
-      this.spotifyData.clientID +
+      AUTH_URL +
+      "/authorize?client_id=" +
+      CLIENT_ID +
       "&response_type=token&redirect_uri=" +
-      (this.isDevMode ? this.devCallbackURI : this.prodCallbackURL) +
+      this.#getCallbackURL() +
       "&scope=" +
-      this.scope;
+      SCOPE;
   }
 
   isConnected() {
@@ -35,12 +36,12 @@ class API {
 
   setToken(token) {
     sessionStorage.setItem("access_token", token);
-    window.location.href = "https://guillaume-tritsch.github.io/SpotifyImageGeneration/index.html";
+    window.location.href = this.#getBase();
   }
 
   deleteToken() {
     sessionStorage.removeItem("access_token");
-    window.location.href = "https://guillaume-tritsch.github.io/SpotifyImageGeneration/index.html";
+    window.location.href = this.#getBase();
   }
 
   clearAllData() {
@@ -71,7 +72,7 @@ class API {
   }
 
   async fetchTopTracks(limit) {
-    const url = `https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=${limit}`;
+    const url = `${API_URL}/top/tracks?time_range=long_term&limit=${limit}`;
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -92,46 +93,8 @@ class API {
     }
   }
 
-  async getAllTopTrackFeature() {
-    console.log("eee")
-    if (this.topTracksFeatures === null) {
-      console.log("bbb")
-
-      let trackPromiseArray = [];
-      for (let track of this.userTopTracks["items"]) {
-        console.log("eerfff")
-        trackPromiseArray.push(this.fetchTrackFeatures(track["id"]));
-      }
-
-      this.topTracksFeatures = Promise.all(trackPromiseArray);
-    }
-    return this.topTracksFeatures;
-  }
-
-  async fetchTrackFeatures(id) {
-    const url = `https://api.spotify.com/v1/audio-features/${id}`;
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${this.#token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Error fetching top tracks");
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Erreur lors de la récupération des morceaux:", error);
-    }
-  }
-
   async fetchUserData() {
-    const url = "https://api.spotify.com/v1/me";
+    const url = `${API_URL}/me`;
     try {
       const response = await fetch(url, {
         method: "GET",
