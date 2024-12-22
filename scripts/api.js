@@ -10,6 +10,8 @@ class API {
 
   userData;
   userTopTracks;
+  userTopArtists;
+  userPlaylist;
 
   #getCallbackURL() {
     return `${this.#getBase()}/${(IS_DEV_MODE) ? 'callback.html' : 'callback' }`
@@ -41,7 +43,6 @@ class API {
   setToken(token) {
     sessionStorage.setItem("access_token", token);
     window.location.href = this.#getBase();
-
   }
 
   deleteToken() {
@@ -81,7 +82,7 @@ class API {
   constructor() {
     this.#token = sessionStorage.getItem("access_token");
 
-    console.log("EEEERRRRR" , this.#token);
+    sessionStorage.removeItem("playlists")
 
     let dataToObtains = [];
 
@@ -93,14 +94,89 @@ class API {
       dataToObtains.push(this.fetchTopTracks(5));
     }
 
+    if (this.isConnected() && !sessionStorage["top_artists"]) {
+      dataToObtains.push(this.fetchTopArtists(5));
+    }
+
+    if (this.isConnected() && !sessionStorage["playlists"]) {
+      dataToObtains.push(this.fetchAllPlaylists());
+    }
+
     this.promiseAllObtention = Promise.all(dataToObtains).then(() => {
       this.userTopTracks = JSON.parse(sessionStorage.getItem("top_tracks"));
       this.userData = JSON.parse(sessionStorage.getItem("user_data"));
+      this.userTopArtists = JSON.parse(sessionStorage.getItem("top_artists"));
+      this.userPlaylist = JSON.parse(sessionStorage.getItem("playlists"));
     });
+  }
+
+  getTopTracks() {
+    return JSON.parse(sessionStorage.getItem("top_tracks"));
+  }
+
+  getTopArtists() {
+    return JSON.parse(sessionStorage.getItem("top_artists"));
   }
 
   getUserName() {
     return this.userData["display_name"];
+  }
+
+  getPlaylists() {
+    return JSON.parse(sessionStorage.getItem("playlists"));
+  }
+
+  async fetchAllPlaylists() {
+    const playlists = [];
+    let url = `${API_URL}/me/playlists?limit=50`;
+  
+    try {
+      while (url) {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${this.#token}`,
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error("Error fetching playlists");
+        }
+  
+        const data = await response.json();
+
+        playlists.push(...data.items);
+  
+        url = data.next;
+      }
+  
+      sessionStorage.setItem("playlists", JSON.stringify(playlists));
+    } catch (error) {
+      console.error("Erreur lors de la récupération des playlists:", error);
+    }
+  }
+  
+  async fetchTopArtists(limit) {
+    const url = `${API_URL}/me/top/artists?time_range=long_term&limit=${limit}`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${this.#token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Error fetching top artists");
+      }
+
+      const data = await response.json();
+      sessionStorage.setItem("top_artists", JSON.stringify(data));
+    } catch (error) {
+      console.error("Erreur lors de la récupération des artistes favoris:", error);
+    }
   }
 
   async fetchTopTracks(limit) {

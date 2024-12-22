@@ -1,0 +1,13 @@
+.button {
+    background-color: var(--green);
+    color: var(--black);
+    padding: clamp(10px, 2vw, 20px) clamp(20px, 4vw, 40px); 
+    border-radius: 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(14px, 2vw, 24px); 
+    font-weight: 600;
+    /* margin: clamp(8px, 1.5vw, 16px); */
+    cursor: pointer;
+}

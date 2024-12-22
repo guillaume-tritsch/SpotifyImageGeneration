@@ -1,0 +1,32 @@
+
+.data-playlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.data-playlist li {
+    list-style: none;
+    width: 13rem;
+    height: 13rem;
+
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+
+}
+
+.data-playlist li img {
+    height: 10rem;
+    width: auto;
+
+    border-radius: 4px;
+}
+
+main {
+    overflow:scroll;
+    padding: 2rem 2rem;
+    align-items: normal;
+}

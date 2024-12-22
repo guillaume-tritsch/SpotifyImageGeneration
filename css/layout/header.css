@@ -1,0 +1,65 @@
+header{
+    width: 90%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+}
+
+nav{
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+
+nav ul{
+    display: flex;
+    gap: 16px;
+}
+
+nav a:not([href="index.html"]) {
+    cursor: pointer;
+    color: var(--grey);
+    transition: color 0.3s;
+}
+
+nav a:not([href="index.html"]):hover {
+    text-decoration: underline;
+    color: var(--white);
+}
+
+nav a[href="index.html"] {
+    font-size: clamp(14px, 2vw, 28px);
+    font-weight: 500;
+}
+
+nav ul a, header a[href="login.html"]{
+    font-size: clamp(12px, 1.5vw, 20px);
+    font-weight: 500;
+}
+
+#login-zone {
+    display: inline-flex;
+    gap: 20px;
+}
+
+#login-zone a {
+    cursor: pointer;
+    color: var(--grey);
+}
+
+#login-zone a:hover {
+    cursor: pointer;
+    color: var(--white);
+}
+
+@media (max-width: 425px) {
+    nav {
+        gap: 16px
+    }
+    nav ul{
+        gap: 8px;
+    }
+}

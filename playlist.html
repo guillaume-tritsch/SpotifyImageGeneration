@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Playlists</title>
+    <link rel="icon" href="img/logo_imac.svg">
+    <link rel="stylesheet" href="css/lib/reset.css"/>
+    <link rel="stylesheet" href="css/font/font.css"/>
+    <link rel="stylesheet" href="css/lib/color.css"/>
+    <link rel="stylesheet" href="css/components/button.css"/>
+    <link rel="stylesheet" href="css/layout/header.css"/>
+    <link rel="stylesheet" href="css/layout/footer.css"/>
+    <link rel="stylesheet" href="css/lib/main.css"/>
+    <link rel="stylesheet" href="css/pages/playlist.css"/>
+
+    <script src="./config.js"></script>
+
+    <script src="./scripts/api.js"></script>
+    <script src="./scripts/loader.js"></script>
+</head>
+
+<body>
+    <div class="modal-background if-loading"></div>
+    <div class="dialog if-loading">
+      <p>Loading...</p>
+    </div>
+
+    <div class="modal-background if-not-loading if-not-connected"></div>
+    <div class="dialog if-not-loading if-not-connected">
+      <p>You need to be connected to access this page</p>
+      <ul>
+          <li>
+              <a class="button" href="index.html">Home</a>
+          </li>
+          <li>
+              <a class="button" onclick="connect()">Connect</a>
+          </li>
+      </ul>
+    </div>
+
+    <header>
+        <nav>
+          <a href="index.html">Spotimac</a>
+          <ul>
+            <li class="javascript-utilities if-connected if-not-loading">
+              <a href="wrapped.html">Your Wrapped</a>
+            </li>
+            <li class="javascript-utilities if-connected if-not-loading">
+              <a href="playlist.html">Your Playlists</a>
+            </li>
+          </ul>
+        </nav>
+        <div id="login-zone">
+          <p class="javascript-utilities if-connected">
+            Logged as <span class="javascript-utilities data-user-name"></span>
+          </p>
+          <p class="javascript-utilities if-loading">Loading...</p>
+          <div class="javascript-utilities if-not-connected if-not-loading">
+            <a onclick="connect()">Login</a>
+          </div>
+          <div class="javascript-utilities if-connected if-not-loading">
+            <a onclick="deconnect()">Log out</a>
+          </div>
+        </div>
+      </header>
+
+    <main>
+        <ul class="data-playlist">
+        </ul>
+    </main>
+
+    <footer>
+        <p>© 2024 - Spotimac</p>
+        <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="notices.html">Legal notices</a></li>
+        </ul>
+    </footer>
+</body>
+

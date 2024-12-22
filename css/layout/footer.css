@@ -1,0 +1,17 @@
+footer{
+    width: 90%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    font-size: clamp(10px, 1vw, 16px);
+    font-weight: 400;
+}
+
+footer ul{
+    display: flex;
+    gap: 16px;
+}
+
+
