@@ -86,3 +86,15 @@ strong{
     background-color: #00000082;
     z-index: 8;
 }
+
+@media (max-width: 550px) {
+    #login-zone {
+        flex-direction: column;
+        gap: 10px;
+        width: min-content;
+    }
+
+    #login-zone p {
+        font-size: 11px;
+    }
+}
