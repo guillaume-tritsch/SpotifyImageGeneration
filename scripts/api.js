@@ -67,7 +67,7 @@ class API {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       });
-      console.log(response);
+
       if (!response.ok) {
         throw new Error("Error request token");
       }
@@ -189,7 +189,7 @@ class API {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
+
       if (!response.ok) {
         throw new Error("Error fetching top tracks");
       }

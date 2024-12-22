@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         let tracksItem = APIInstance.getTopTracks()["items"];
 
-        console.log(artistsItem);
         for (let el of listTracksHTMLElement) {
           for (let index = 0; index < tracksItem.length; index++) {
             const element = tracksItem[index];
@@ -116,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         let playlistHTMLElement =
           document.getElementsByClassName("data-playlist");
-        console.log(APIInstance.getPlaylists());
 
         for (let el of playlistHTMLElement) {
           for (let playlist of APIInstance.getPlaylists()) {
