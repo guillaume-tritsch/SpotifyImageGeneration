@@ -1,5 +1,7 @@
 const IS_DEV_MODE = (window.location.origin === "http://localhost:5500") ? true : false;
 
+console.log(window.location.origin, (window.location.origin === "http://localhost:5500"));
+
 const DEV_URL = "http://localhost:5500";
 const PROD_URL = "https://guillaume-tritsch.github.io/SpotifyImageGeneration";
 
