@@ -35,7 +35,7 @@ nav a[href="index.html"] {
     font-weight: 500;
 }
 
-nav ul a, header a[href="login.html"]{
+nav ul a, #login-zone p,  header a[href="login.html"]{
     font-size: clamp(12px, 1.5vw, 20px);
     font-weight: 500;
 }
@@ -61,5 +61,13 @@ nav ul a, header a[href="login.html"]{
     }
     nav ul{
         gap: 8px;
+    }
+}
+
+@media (max-width: 550px) {
+    #login-zone {
+        flex-direction: column;
+        gap: 8px;
+        width: min-content;
     }
 }
