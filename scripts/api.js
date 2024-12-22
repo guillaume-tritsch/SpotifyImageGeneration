@@ -14,13 +14,13 @@ class API {
   userPlaylist;
 
   #getCallbackURL() {
-    return `${this.#getBase()}/${(IS_DEV_MODE) ? 'callback.html' : 'callback' }`
+    return `${this.getBase()}/${(IS_DEV_MODE) ? 'callback.html' : 'callback' }`
   }
 
-  #getBase() {
+  getBase() {
     return (IS_DEV_MODE) ? DEV_URL : PROD_URL;
   }
-
+  
   async spotifyConnect() {
      window.location.href = AUTH_URL +
       "/authorize?client_id=" +
@@ -42,12 +42,12 @@ class API {
 
   setToken(token) {
     sessionStorage.setItem("access_token", token);
-    window.location.href = this.#getBase();
+    window.location.href = this.getBase();
   }
 
   deleteToken() {
     sessionStorage.removeItem("access_token");
-    window.location.href = this.#getBase();
+    window.location.href = this.getBase();
   }
 
   clearAllData() {

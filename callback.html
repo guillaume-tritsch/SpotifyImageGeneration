@@ -17,7 +17,12 @@
 
       const code = params.get("code");
 
-      APIInstance.setCode(code);
+      if (code !== null) {
+        APIInstance.setCode(code);
+      } else {
+        window.location.href = APIInstance.getBase()
+      }
+       
       
     </script>
   </body>
