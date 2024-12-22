@@ -80,3 +80,18 @@
   text-align: center;
   width: 60%;
 }
+
+.wrapped-footer a:hover {
+  cursor: pointer;
+  color: var(--green);
+}
+
+.hover-green {
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+.hover-green:hover {
+    filter: hue-rotate(90deg) brightness(2);
+    cursor: pointer;
+}

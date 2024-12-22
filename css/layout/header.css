@@ -35,7 +35,7 @@ nav a[href="index.html"] {
     font-weight: 500;
 }
 
-nav ul a, #login-zone p,  header a[href="login.html"]{
+nav ul a, #login-zone p, #login-zone a ,  header a[href="login.html"]{
     font-size: clamp(12px, 1.5vw, 20px);
     font-weight: 500;
 }

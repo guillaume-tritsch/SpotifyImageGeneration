@@ -8,6 +8,5 @@
     display: inline-block;
     font-size: clamp(14px, 2vw, 24px); 
     font-weight: 600;
-    /* margin: clamp(8px, 1.5vw, 16px); */
     cursor: pointer;
 }
