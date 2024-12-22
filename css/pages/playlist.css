@@ -2,28 +2,28 @@
 .data-playlist {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center
+    justify-content: space-around;
+    gap: 36px;
+    width: min(90%, 1440px); 
 }
 
 .data-playlist li {
     list-style: none;
-    width: 13rem;
-    height: 13rem;
-
-    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    width: 40%;
+    max-width: 200px;
+    align-items: center;
 }
 
 .data-playlist li img {
-    height: 10rem;
-    width: auto;
-
+    height: auto;
+    width: 100%;
     border-radius: 4px;
 }
 
-main {
+main {  
     overflow:scroll;
     padding: 2rem 2rem;
     align-items: normal;
