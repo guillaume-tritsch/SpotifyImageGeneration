@@ -7,7 +7,7 @@ class API {
     "callback";
 
   promiseAllObtention;
-
+  
   userData;
   userTopTracks;
   userTopArtists;
@@ -46,8 +46,7 @@ class API {
   }
 
   deleteToken() {
-    sessionStorage.removeItem("access_token");
-    window.location.href = this.getBase();
+    this.#token = null;
   }
 
   clearAllData() {
@@ -101,7 +100,7 @@ class API {
     if (this.isConnected() && !sessionStorage["playlists"]) {
       dataToObtains.push(this.fetchAllPlaylists());
     }
-
+    
     this.promiseAllObtention = Promise.all(dataToObtains).then(() => {
       this.userTopTracks = JSON.parse(sessionStorage.getItem("top_tracks"));
       this.userData = JSON.parse(sessionStorage.getItem("user_data"));
@@ -119,7 +118,7 @@ class API {
   }
 
   getUserName() {
-    return this.userData["display_name"];
+    return JSON.parse(sessionStorage.getItem("user_data"))["display_name"];
   }
 
   getPlaylists() {
@@ -235,6 +234,7 @@ function connect() {
 }
 
 function deconnect() {
-  APIInstance.clearAllData();
   APIInstance.deleteToken();
+  APIInstance.clearAllData();
+  window.location.href = APIInstance.getBase();
 }
