@@ -74,7 +74,7 @@
   padding: 64px 0 32px 0;
 }
 
-.wrapped-intro p {
+.wrapped-intro p, #popularity-text{
   font-size: clamp(20px, 2.5vw, 28px);
   font-style: italic;
   text-align: center;
