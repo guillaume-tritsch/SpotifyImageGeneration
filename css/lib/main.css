@@ -87,14 +87,20 @@ strong{
     z-index: 8;
 }
 
-@media (max-width: 550px) {
-    #login-zone {
-        flex-direction: column;
-        gap: 10px;
-        width: min-content;
-    }
-
-    #login-zone p {
-        font-size: 11px;
-    }
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+button {
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    cursor: pointer; 
+}
+body a{
+    text-decoration: none;
+    list-style-type: none;
+    color: var(--white);
 }
